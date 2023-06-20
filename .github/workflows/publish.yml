@@ -1,0 +1,31 @@
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: gremid/tei-stylesheets-action@v7.54.0
+        with:
+          transform: teitorelaxng
+          source: ./tei_turath.odd
+          target: ./tei_turath.rng
+      - uses: gremid/tei-stylesheets-action@v7.54.0
+        with:
+          transform: teitornc
+          source: ./tei_lite.odd
+          target: ./tei_turath.rnc
+      - uses: gremid/tei-stylesheets-action@v7.54.0
+        with:
+          transform: teitoschematron
+          source: ./tei_lite.odd
+          target: ./tei_turath.sch.xsl
+      - uses: gremid/tei-stylesheets-action@v7.54.0
+        with:
+          transform: teitohtml
+          source: ./tei_lite.odd
+          target: ./docs/tei_turath.html          
