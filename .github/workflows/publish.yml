@@ -17,15 +17,15 @@ jobs:
       - uses: gremid/tei-stylesheets-action@v7.54.0
         with:
           transform: teitornc
-          source: ./tei_lite.odd
+          source: ./tei_turath.odd
           target: ./tei_turath.rnc
       - uses: gremid/tei-stylesheets-action@v7.54.0
         with:
           transform: teitoschematron
-          source: ./tei_lite.odd
+          source: ./tei_turath.odd
           target: ./tei_turath.sch.xsl
       - uses: gremid/tei-stylesheets-action@v7.54.0
         with:
           transform: teitohtml
-          source: ./tei_lite.odd
+          source: ./tei_turath.odd
           target: ./docs/tei_turath.html          
